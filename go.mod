@@ -1,4 +1,4 @@
-module github.com/go-pdf/fpdf
+module github.com/boomhut/fpdf
 
 go 1.21
 

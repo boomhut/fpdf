@@ -28,8 +28,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/internal/example"
+	"github.com/boomhut/fpdf"
+	"github.com/boomhut/fpdf/internal/example"
 )
 
 func init() {

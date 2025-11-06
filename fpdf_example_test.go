@@ -36,9 +36,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/internal/example"
-	"github.com/go-pdf/fpdf/internal/files"
+	"github.com/boomhut/fpdf"
+	"github.com/boomhut/fpdf/internal/example"
+	"github.com/boomhut/fpdf/internal/files"
 )
 
 func loremList() []string {
@@ -123,8 +123,10 @@ func ExampleFpdf_AddPage() {
 	pdf.AliasNbPages("")
 	pdf.AddPage()
 	pdf.SetFont("Times", "", 12)
+	tr := pdf.UnicodeTranslatorFromDescriptor("")
 	for j := 1; j <= 40; j++ {
-		pdf.CellFormat(0, 10, fmt.Sprintf("Printing line number %d", j),
+		text := tr(fmt.Sprintf("Printing à line number %d", j))
+		pdf.CellFormat(0, 10, text,
 			"", 1, "", false, 0, "")
 	}
 	fileStr := example.Filename("Fpdf_AddPage")
@@ -758,11 +760,11 @@ func ExampleFpdf_SetKeywords() {
 	if err == nil {
 		pdf := fpdf.New("", "", "", "")
 		pdf.SetFontLocation(example.FontDir())
-		pdf.SetTitle("世界", true)
-		pdf.SetAuthor("世界", true)
-		pdf.SetSubject("世界", true)
-		pdf.SetCreator("世界", true)
-		pdf.SetKeywords("世界", true)
+		pdf.SetTitle("Example Title", true)
+		pdf.SetAuthor("Example Author", true)
+		pdf.SetSubject("Example Subject", true)
+		pdf.SetCreator("Example Creator", true)
+		pdf.SetKeywords("Example Keywords", true)
 		pdf.AddFont("Calligrapher", "", "CalligrapherRegular.json")
 		pdf.AddPage()
 		pdf.SetFont("Calligrapher", "", 16)
@@ -1419,7 +1421,7 @@ func ExampleFpdf_CellFormat_align() {
 				pdf.CellFormat(170, 257, rec.txt, borderStr, 0, rec.align, false, 0, linkStr)
 				borderStr = ""
 			}
-			linkStr = "https://github.com/go-pdf/fpdf"
+			linkStr = "https://github.com/boomhut/fpdf"
 		}
 	}
 	pdf := fpdf.New("P", "mm", "A4", "") // A4 210.0 x 297.0
@@ -1453,7 +1455,7 @@ func ExampleFpdf_CellFormat_codepageescape() {
 		pdf.Ln(ht)
 	}
 	pdf.AddPage()
-	htmlStr := `Until go-pdf/fpdf supports UTF-8 encoded source text, source text needs ` +
+	htmlStr := `Until boomhut/fpdf supports UTF-8 encoded source text, source text needs ` +
 		`to be specified with all special characters escaped to match the code page ` +
 		`layout of the currently selected font. By default, gofdpf uses code page 1252.` +
 		` See <a href="http://en.wikipedia.org/wiki/Windows-1252">Wikipedia</a> for ` +
@@ -1489,7 +1491,7 @@ func ExampleFpdf_CellFormat_codepage() {
 		pdf.Ln(ht)
 	}
 	pdf.AddPage()
-	str := `Go-pdf/fpdf provides a translator that will convert any UTF-8 code point ` +
+	str := `boomhut/fpdf provides a translator that will convert any UTF-8 code point ` +
 		`that is present in the specified code page.`
 	pdf.MultiCell(190, ht, str, "", "L", false)
 	pdf.Ln(2 * ht)
@@ -1627,7 +1629,7 @@ func ExampleFpdf_RegisterImageReader() {
 		wd       = 210
 		ht       = 297
 		fontSize = 15
-		urlStr   = "https://github.com/go-pdf/fpdf/raw/main/image/gofpdf.png"
+		urlStr   = "https://github.com/boomhut/fpdf/raw/main/image/gofpdf.png"
 		msgStr   = `Images from the web can be easily embedded when a PDF document is generated.`
 	)
 

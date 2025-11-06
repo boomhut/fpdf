@@ -1,4 +1,4 @@
-// Copyright ©2023 The go-pdf Authors. All rights reserved.
+// Copyright ©2023 The boomhut Authors. All rights reserved.
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
@@ -24,8 +24,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/go-pdf/fpdf"
-	"github.com/go-pdf/fpdf/internal/example"
+	"github.com/boomhut/fpdf"
+	"github.com/boomhut/fpdf/internal/example"
 )
 
 func ExampleTtfParse() {

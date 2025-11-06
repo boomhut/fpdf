@@ -46,10 +46,10 @@ support for text, drawing and images.
 
 -   Import PDFs as templates
 
-go-pdf/fpdf has no dependencies other than the Go standard library. All tests
+boomhut/fpdf has no dependencies other than the Go standard library. All tests
 pass on Linux, Mac and Windows platforms.
 
-go-pdf/fpdf supports UTF-8 TrueType fonts and “right-to-left” languages. Note
+boomhut/fpdf supports UTF-8 TrueType fonts and “right-to-left” languages. Note
 that Chinese, Japanese, and Korean characters may not be included in
 many general purpose fonts. For these languages, a specialized font (for
 example, NotoSansSC for simplified Chinese) can be used.
@@ -61,11 +61,11 @@ page encodings for languages that have fewer than 256 glyphs.
 
 To install the package on your system, run
 
-	go get github.com/go-pdf/fpdf
+	go get github.com/boomhut/fpdf
 
 Later, to receive updates, run
 
-	go get -u -v github.com/go-pdf/fpdf/...
+	go get -u -v github.com/boomhut/fpdf/...
 
 # Quick Start
 
@@ -118,7 +118,7 @@ PHP.
 # Example PDFs
 
 A side effect of running go test ./... is the production of a number of
-example PDFs. These can be found in the go-pdf/fpdf/pdf directory after the
+example PDFs. These can be found in the boomhut/fpdf/pdf directory after the
 tests complete.
 
 Please note that these examples run in the context of a test. In order
@@ -129,7 +129,7 @@ summary().
 Example PDFs can be compared with reference copies in order to verify
 that they have been generated as expected. This comparison will be
 performed if a PDF with the same name as the example PDF is placed in
-the go-pdf/fpdf/pdf/reference directory and if the third argument to
+the boomhut/fpdf/pdf/reference directory and if the third argument to
 ComparePDFFiles() in internal/example/example.go is true. (By default it
 is false.) The routine that summarizes an example will look for this
 file and, if found, will call ComparePDFFiles() to check the example PDF
@@ -259,4 +259,4 @@ times, and for file attachments and annotations.
 
 -   Improve test coverage as reported by the coverage tool.
 */
-package fpdf // import "github.com/go-pdf/fpdf"
+package fpdf // import "github.com/boomhut/fpdf"

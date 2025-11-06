@@ -1,14 +1,14 @@
 # GoFPDF document generator
 
-[![GitHub release](https://img.shields.io/github/release/go-pdf/fpdf.svg)](https://github.com/go-pdf/fpdf/releases)
-[![CI](https://github.com/go-pdf/fpdf/workflows/CI/badge.svg)](https://github.com/go-pdf/fpdf/actions)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/go-pdf/fpdf/master/LICENSE)
-[![Report](https://goreportcard.com/badge/github.com/go-pdf/fpdf)](https://goreportcard.com/report/github.com/go-pdf/fpdf)
-[![GoDoc](https://img.shields.io/badge/godoc-GoFPDF-blue.svg)](https://godoc.org/github.com/go-pdf/fpdf)
+[![GitHub release](https://img.shields.io/github/release/boomhut/fpdf.svg)](https://github.com/boomhut/fpdf/releases)
+[![CI](https://github.com/boomhut/fpdf/workflows/CI/badge.svg)](https://github.com/boomhut/fpdf/actions)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/boomhut/fpdf/master/LICENSE)
+[![Report](https://goreportcard.com/badge/github.com/boomhut/fpdf)](https://goreportcard.com/report/github.com/boomhut/fpdf)
+[![GoDoc](https://img.shields.io/badge/godoc-GoFPDF-blue.svg)](https://godoc.org/github.com/boomhut/fpdf)
 
-![](https://github.com/go-pdf/fpdf/raw/master/image/logo_gofpdf.jpg)
+![](https://github.com/boomhut/fpdf/raw/master/image/logo_gofpdf.jpg)
 
-Package `go-pdf/fpdf` implements a PDF document generator with high level
+Package `boomhut/fpdf` implements a PDF document generator with high level
 support for text, drawing and images.
 
 ## Features
@@ -51,13 +51,13 @@ page encodings for languages that have fewer than 256 glyphs.
 To install the package on your system, run
 
 ``` shell
-go get github.com/go-pdf/fpdf
+go get github.com/boomhut/fpdf
 ```
 
 Later, to receive updates, run
 
 ``` shell
-go get -u -v github.com/go-pdf/fpdf/...
+go get -u -v github.com/boomhut/fpdf/...
 ```
 
 ## Quick Start
@@ -73,7 +73,7 @@ err := pdf.OutputFileAndClose("hello.pdf")
 ```
 
 See the functions in the
-[fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+[fpdf\_test.go](https://github.com/boomhut/fpdf/blob/master/fpdf_test.go)
 file (shown as examples in this documentation) for more advanced PDF
 examples.
 
@@ -121,7 +121,7 @@ the tests complete.
 
 Please note that these examples run in the context of a test. In order
 run an example as a standalone application, you’ll need to examine
-[fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+[fpdf\_test.go](https://github.com/boomhut/fpdf/blob/master/fpdf_test.go)
 for some helper routines, for example `exampleFilename()` and
 `summary()`.
 
@@ -175,14 +175,14 @@ Fonts](http://dejavu-fonts.org/).
 
 The [draw2d](https://github.com/llgcode/draw2d) package is a two
 dimensional vector graphics library that can generate output in
-different forms. It uses `go-pdf/fpdf` for its document production mode.
+different forms. It uses `boomhut/fpdf` for its document production mode.
 
 ## Contributing Changes
 
-`go-pdf/fpdf` is a global community effort and you are invited to make it even
+`boomhut/fpdf` is a global community effort and you are invited to make it even
 better. If you have implemented a new feature or corrected a problem,
 please consider contributing your change to the project. A contribution
-that does not directly pertain to the core functionality of `go-pdf/fpdf`
+that does not directly pertain to the core functionality of `boomhut/fpdf`
 should be placed in its own directory directly beneath the `contrib`
 directory.
 
@@ -192,7 +192,7 @@ Here are guidelines for making submissions. Your change should
   - be properly documented
   - be formatted with `go fmt`
   - include an example in
-    [fpdf\_test.go](https://github.com/go-pdf/fpdf/blob/master/fpdf_test.go)
+    [fpdf\_test.go](https://github.com/boomhut/fpdf/blob/master/fpdf_test.go)
     if appropriate
   - conform to the standards of [golint](https://github.com/golang/lint)
     and [go vet](https://golang.org/cmd/vet/), that is, `golint .` and
@@ -204,7 +204,7 @@ are the preferred means of accepting your changes.
 
 ## License
 
-`go-pdf/fpdf` is released under the MIT License. It is copyrighted by Kurt Jung and the contributors acknowledged below.
+`boomhut/fpdf` is released under the MIT License. It is copyrighted by Kurt Jung and the contributors acknowledged below.
 
 ## Acknowledgments
 

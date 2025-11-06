@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-pdf/fpdf"
+	"github.com/boomhut/fpdf"
 )
 
 func errPrintf(fmtStr string, args ...interface{}) {
