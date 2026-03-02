@@ -377,6 +377,23 @@ type FontLoader interface {
 	Open(name string) (io.Reader, error)
 }
 
+// OutputIntentSubtype any of the pre defined types below or a value defined by ISO 32000 extension.
+type OutputIntentSubtype string
+
+const (
+	OutputIntent_GTS_PDFX  OutputIntentSubtype = "GTS_PDFX"
+	OutputIntent_GTS_PDFA1 OutputIntentSubtype = "GTS_PDFA1"
+	OutputIntent_GTS_PDFE1 OutputIntentSubtype = "GTS_PDFE1"
+)
+
+// OutputIntentType defines an output intent with name and ICC color profile.
+type OutputIntentType struct {
+	SubtypeIdent              OutputIntentSubtype
+	OutputConditionIdentifier string
+	Info                      string
+	ICCProfile                []byte
+}
+
 // Pdf defines the interface used for various methods. It is implemented by the
 // main FPDF instance as well as templates.
 type Pdf interface {
@@ -421,24 +438,46 @@ type Pdf interface {
 	Err() bool
 	Error() error
 	GetAlpha() (alpha float64, blendModeStr string)
+	GetAuthor() string
 	GetAutoPageBreak() (auto bool, margin float64)
+	GetCatalogSort() bool
 	GetCellMargin() float64
+	GetCompression() bool
 	GetConversionRatio() float64
+	GetCreationDate() time.Time
+	GetCreator() string
+	GetDisplayMode() (zoomStr, layoutStr string)
 	GetDrawColor() (int, int, int)
 	GetDrawSpotColor() (name string, c, m, y, k byte)
 	GetFillColor() (int, int, int)
 	GetFillSpotColor() (name string, c, m, y, k byte)
 	GetFontDesc(familyStr, styleStr string) FontDescType
+	GetFontFamily() string
+	GetFontLoader() FontLoader
+	GetFontLocation() string
 	GetFontSize() (ptSize, unitSize float64)
+	GetFontStyle() string
 	GetImageInfo(imageStr string) (info *ImageInfoType)
+	GetJavascript() string
+	GetKeywords() string
+	GetLang() string
+	GetLineCapStyle() string
+	GetLineJoinStyle() string
 	GetLineWidth() float64
 	GetMargins() (left, top, right, bottom float64)
-	GetPageSizeStr(sizeStr string) (size SizeType)
+	GetModificationDate() time.Time
 	GetPageSize() (width, height float64)
+	GetPageSizeStr(sizeStr string) (size SizeType)
+	GetProducer() string
 	GetStringWidth(s string) float64
+	GetSubject() string
 	GetTextColor() (int, int, int)
 	GetTextSpotColor() (name string, c, m, y, k byte)
+	GetTitle() string
+	GetUnderlineThickness() float64
+	GetWordSpacing() float64
 	GetX() float64
+	GetXmpMetadata() []byte
 	GetXY() (float64, float64)
 	GetY() float64
 	HTMLBasicNew() (html HTMLBasicType)
@@ -670,6 +709,9 @@ type Fpdf struct {
 		draw, fill, text colorType
 	}
 	spotColorMap           map[string]spotColorType // Map of named ink-based colors
+	outputIntents          []OutputIntentType       // OutputIntents
+	outputIntentStartN     int                      // Start object number for output intents
+	nXMP                   int                      // XMP object number
 	userUnderlineThickness float64                  // A custom user underline thickness multiplier.
 
 	fmt struct {

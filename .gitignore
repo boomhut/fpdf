@@ -23,3 +23,6 @@ coverage.html
 
 # macOS
 .DS_Store
+*.pdf
+*.pdf
+/pdf

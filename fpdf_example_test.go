@@ -2875,3 +2875,108 @@ func ExampleFpdf_AddFont_robotoslab() {
 	// Output:
 	// Successfully generated pdf/Fpdf_AddFont_RobotoSlab.pdf
 }
+
+func ExampleFpdf_SetXmpMetadata() {
+	const xmpData = `<?xpacket begin="" id=""?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 5.6">
+  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <!-- Standard PDF Metadata -->
+    <rdf:Description rdf:about=""
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+      xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
+      xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/">
+
+      <!-- Document Title -->
+      <dc:title>
+        <rdf:Alt>
+          <rdf:li xml:lang="x-default">XMP metadata example</rdf:li>
+        </rdf:Alt>
+      </dc:title>
+
+      <!-- Author(s) -->
+      <dc:creator>
+        <rdf:Seq>
+          <rdf:li>Kurt Jung</rdf:li>
+					<rdf:li>The go-pdf Authors</rdf:li>
+        </rdf:Seq>
+      </dc:creator>
+
+      <!-- Subject/Description -->
+      <dc:description>
+        <rdf:Alt>
+          <rdf:li xml:lang="x-default">Example PDF that embeds custom XMP metadata</rdf:li>
+        </rdf:Alt>
+      </dc:description>
+
+      <!-- PDF Version -->
+      <pdf:PDFVersion>1.3</pdf:PDFVersion>
+
+    </rdf:Description>
+
+  </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="r"?>`
+
+	pdf := fpdf.New("P", "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "", 12)
+	pdf.Write(10, "Embed custom XMP metadata.")
+
+	pdf.SetXmpMetadata([]byte(xmpData))
+
+	fileStr := example.Filename("Fpdf_SetXmpMetadata")
+	err := pdf.OutputFileAndClose(fileStr)
+	example.SummaryCompare(err, fileStr)
+	// Output:
+	// Successfully generated pdf/Fpdf_SetXmpMetadata.pdf
+}
+
+// ExampleFpdf_AddOutputIntent demonstrates adding an output intent.
+func ExampleFpdf_AddOutputIntent() {
+	iccBytes, err := os.ReadFile(example.ICCFile("sRGB2014.icc"))
+	if err != nil {
+		panic(err)
+	}
+
+	pdf := fpdf.New(fpdf.OrientationPortrait, "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "B", 16)
+	pdf.Cell(40, 10, "Hello World!")
+	pdf.AddOutputIntent(fpdf.OutputIntentType{
+		SubtypeIdent:              fpdf.OutputIntent_GTS_PDFA1,
+		OutputConditionIdentifier: "sRGB RGB",
+		ICCProfile:                iccBytes,
+	})
+	fileStr := example.Filename("Fpdf_AddOutputIntent")
+	err = pdf.OutputFileAndClose(fileStr)
+	example.SummaryCompare(err, fileStr)
+	// Output:
+	// Successfully generated pdf/Fpdf_AddOutputIntent.pdf
+}
+
+// ExampleFpdf_SVGBasicDraw_qrcode demonstrates adding a QR code from SVG.
+func ExampleFpdf_SVGBasicDraw_qrcode() {
+	svgBytes, err := os.ReadFile(example.ImageFile("qrcode.svg"))
+	if err != nil {
+		panic(err)
+	}
+
+	pdf := fpdf.New("P", "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "B", 16)
+	pdf.Cell(40, 10, "Hello, world!")
+
+	pdfsvg, err := fpdf.SVGBasicParse(svgBytes)
+	if err != nil {
+		panic(err)
+	}
+	pdf.SVGBasicDraw(&pdfsvg, 20, "_")
+
+	fileStr := example.Filename("Fpdf_SVGBasicDraw_qrcode")
+	err = pdf.OutputFileAndClose(fileStr)
+	example.SummaryCompare(err, fileStr)
+	// Output:
+	// Successfully generated pdf/Fpdf_SVGBasicDraw_qrcode.pdf
+}
