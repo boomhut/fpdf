@@ -2821,16 +2821,44 @@ func ExampleFpdf_RoundedRect_rotated() {
 	// Successfully generated pdf/Fpdf_RoundedRect_rotated.pdf
 }
 
-// ExampleFpdf_AddFont_robotoslab demonstrates the use of the Roboto Slab font.
+// ExampleFpdf_AddFont_robotoslab demonstrates the use of the Roboto Slab font
+// in multiple weights.
 func ExampleFpdf_AddFont_robotoslab() {
 	pdf := fpdf.New("P", "mm", "A4", example.FontDir())
 	pdf.AddFont("RobotoSlab", "", "robotoslab.json")
+	pdf.AddFont("RobotoSlab-Thin", "", "robotoslab_thin.json")
+	pdf.AddFont("RobotoSlab-ExtraLight", "", "robotoslab_extralight.json")
+	pdf.AddFont("RobotoSlab-Light", "", "robotoslab_light.json")
+	pdf.AddFont("RobotoSlab-Medium", "", "robotoslab_medium.json")
+	pdf.AddFont("RobotoSlab-SemiBold", "", "robotoslab_semibold.json")
+	pdf.AddFont("RobotoSlab-Bold", "", "robotoslab_bold.json")
+	pdf.AddFont("RobotoSlab-ExtraBold", "", "robotoslab_extrabold.json")
+	pdf.AddFont("RobotoSlab-Black", "", "robotoslab_black.json")
 	pdf.AddPage()
-	pdf.SetFont("RobotoSlab", "", 24)
-	pdf.Cell(0, 10, "Roboto Slab font sample")
-	pdf.Ln(12)
-	pdf.SetFontSize(16)
-	pdf.Cell(0, 10, "The quick brown fox jumps over the lazy dog.")
+	fontSize := 16.0
+	lineHt := 8.0
+	sampleText := "The quick brown fox jumps over the lazy dog."
+	for _, item := range []struct {
+		family string
+		label  string
+	}{
+		{"RobotoSlab-Thin", "Thin 100"},
+		{"RobotoSlab-ExtraLight", "ExtraLight 200"},
+		{"RobotoSlab-Light", "Light 300"},
+		{"RobotoSlab", "Regular 400"},
+		{"RobotoSlab-Medium", "Medium 500"},
+		{"RobotoSlab-SemiBold", "SemiBold 600"},
+		{"RobotoSlab-Bold", "Bold 700"},
+		{"RobotoSlab-ExtraBold", "ExtraBold 800"},
+		{"RobotoSlab-Black", "Black 900"},
+	} {
+		pdf.SetFont("Helvetica", "", 10)
+		pdf.Cell(0, lineHt, item.label)
+		pdf.Ln(lineHt)
+		pdf.SetFont(item.family, "", fontSize)
+		pdf.Cell(0, lineHt, sampleText)
+		pdf.Ln(lineHt + 2)
+	}
 	fileStr := example.Filename("Fpdf_AddFont_RobotoSlab")
 	err := pdf.OutputFileAndClose(fileStr)
 	example.SummaryCompare(err, fileStr)
