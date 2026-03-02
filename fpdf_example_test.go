@@ -2820,3 +2820,20 @@ func ExampleFpdf_RoundedRect_rotated() {
 	// Output:
 	// Successfully generated pdf/Fpdf_RoundedRect_rotated.pdf
 }
+
+// ExampleFpdf_AddFont_robotoslab demonstrates the use of the Roboto Slab font.
+func ExampleFpdf_AddFont_robotoslab() {
+	pdf := fpdf.New("P", "mm", "A4", example.FontDir())
+	pdf.AddFont("RobotoSlab", "", "robotoslab.json")
+	pdf.AddPage()
+	pdf.SetFont("RobotoSlab", "", 24)
+	pdf.Cell(0, 10, "Roboto Slab font sample")
+	pdf.Ln(12)
+	pdf.SetFontSize(16)
+	pdf.Cell(0, 10, "The quick brown fox jumps over the lazy dog.")
+	fileStr := example.Filename("Fpdf_AddFont_RobotoSlab")
+	err := pdf.OutputFileAndClose(fileStr)
+	example.SummaryCompare(err, fileStr)
+	// Output:
+	// Successfully generated pdf/Fpdf_AddFont_RobotoSlab.pdf
+}
